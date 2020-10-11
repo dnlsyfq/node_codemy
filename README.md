@@ -62,6 +62,34 @@ The core modules are defined within Node.js’s source and are located in the li
 ```
 let events = require('events');
 ```
+> local module
+local modules are required by passing in the path to the module
+```
+let Dog = require('./dog'); 
 
+// or 
+let Dog = require('./dog.js');
+```
 
+> module.exports
+special JavaScript object called module.exports. It holds everything in that file, or module, that’s available to be required into a different file.
+```
+// dog.js
 
+module.exports = class Dog {
+ 
+ constructor(name){
+  this.name = name;
+ }
+ 
+ praise(){
+  return `Good dog, ${this.name}!`;
+ }
+}
+
+// app.js
+
+let Dog = require('./dog.js');
+const tadpole = new Dog('Tadpole');
+console.log(tadpole.praise());
+```
